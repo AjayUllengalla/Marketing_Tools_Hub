@@ -7,7 +7,7 @@ import lombok.Data;
 public class DescriptionRequest {
 
 	@Valid
-	private String description;
+	private String description; // field for description input
 
 	public String getDescription() {
 		return description;
