@@ -19,48 +19,54 @@ export default function ToolPage() {
   if (!tool) return <h3 className="text-center mt-4">Tool not found</h3>;
 
   const handleSubmit = async () => {
-    if (!input) {
-      toast.error("Input is required!");
-      return;
+  if (!input) {
+    toast.error("Input is required!");
+    return;
+  }
+
+  try {
+  setLoading(true);
+
+  let requestBody = {};
+
+  if (tool.path === "hashtags") {
+    requestBody = { keyword: input.trim() };
+  } 
+  else if (tool.path === "caption") {
+    requestBody = { description: input.trim() };
+  } 
+  else {
+    toast.error("Tool not connected yet");
+    return;
+  }
+
+  console.log("Sending:", requestBody);
+
+  const res = await api.post(tool.endpoint, requestBody, {
+    headers: {
+      "Content-Type": "application/json"
     }
+  });
 
-    
-    if (tool.path === "utm") {
-      const utm = `${input}?utm_source=google&utm_medium=social&utm_campaign=test`;
-      setResult(utm);
-      return;
-    }
+  console.log("Response:", res.data);
 
-    try {
-      setLoading(true);
+  setResult(res.data);
 
-      let requestBody = {};
+  toast.success("Success!");
+} catch (err) {
+  console.error("ERROR:", err.response?.data || err.message);
 
-      
-      if (tool.path === "hashtags") {
-        requestBody = { keyword: input };
-      } 
-      else if (tool.path === "caption") {
-        requestBody = { description: input };
-      } 
-      else {
-        toast.info("This tool is not connected to backend yet");
-        return;
-      }
-
-      const res = await api.post(tool.endpoint, requestBody);
-
-      
-      setResult(res.data);
-
-      toast.success("Generated successfully!");
-    } catch (err) {
-      console.error(err);
-      toast.error("Server error!");
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (err.response?.status === 400) {
+    toast.error("Bad request - check input format");
+  } else if (err.response?.status === 500) {
+    toast.error("Server error (backend issue)");
+  } else {
+    toast.error("Something went wrong");
+  }
+} finally {
+  setLoading(false);
+}
+};
 
   
   const handleCopy = () => {

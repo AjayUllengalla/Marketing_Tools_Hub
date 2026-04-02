@@ -12,7 +12,7 @@ const tools = [
         name: "Caption Generator",
         path: "caption",
         input: "Enter topic",
-        endpoint: "/caption"
+        endpoint: "/description"
       }
     ]
   },
