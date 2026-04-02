@@ -7,7 +7,7 @@ import lombok.Data;
 public class HashtagRequest {
 
 	@NotBlank
-	private String keyword;
+	private String keyword; // field for keyword input
 	
 	public String getKeyword() {
 		return keyword;

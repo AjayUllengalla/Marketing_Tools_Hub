@@ -22,13 +22,10 @@ public class SocialController {
 	 public SocialController(SocialService social) {
 	        this.social = social;
 	    }
-	@PostMapping("/hashtags")
-	public ResponseEntity<String> generateHashTags(@RequestBody HashtagRequest req)  {
+	@PostMapping("/hashtags") // endpoint to generate hashtags
+	public ResponseEntity<String> generateHashTags(@RequestBody HashtagRequest req)  { // method to generate hashtags
 		
-//		if(req.getKeyword() == null || req.getKeyword().trim().isEmpty()) {
-//			throw new CustomException("Enter Must");
-//		}
-		return ResponseEntity.ok(social.generateHashTags(req.getKeyword()));
+		return ResponseEntity.ok(social.generateHashTags(req.getKeyword())); // response	
 	}
 	
 	@PostMapping("/description")
