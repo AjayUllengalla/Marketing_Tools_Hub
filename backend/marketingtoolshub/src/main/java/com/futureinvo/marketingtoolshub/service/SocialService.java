@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.futureinvo.marketingtoolshub.exception.CustomException;
 
-//import com.futureinvo.marketingtoolshub.exception.CustomException;
-
 
 @Service
 public class SocialService {
@@ -18,6 +16,8 @@ public class SocialService {
 		
 		if(keyword == null || keyword.isBlank()) {
 			throw new CustomException("Must enter topic or related keyword"); // validation for empty keyword
+		} else if(keyword.length() < 4) {
+			throw new CustomException("Keyword must have atleast 4 characters"); // validation for keyword length
 		}
 		String prompt = "Generate 10 trending hashtags for: " + keyword;
 		return gemini.generate(prompt); 
@@ -27,6 +27,10 @@ public class SocialService {
 
 		if(description == null || description.isBlank()) {
 			throw new CustomException("Must enter a topic or related content"); // validation for empty description
+		} else if(description.length() > 500) {
+			throw new CustomException("Description must be less than 500 characters"); // validation for description length
+		} else if(description.length() < 10) {
+			throw new CustomException("Description must be at least 10 characters long"); // validation for description length
 		}
 		String prompt = "Generate a Description for post or video or reel " + description;
 		return gemini.generate(prompt);

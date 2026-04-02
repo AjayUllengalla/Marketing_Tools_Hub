@@ -1,5 +1,6 @@
 package com.futureinvo.marketingtoolshub.service;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +62,8 @@ public class GeminiService { //service for GeminiAI calling
               return ((Map) parts.get(0)).get("text").toString(); // response
         } catch(HttpServerErrorException serverError) {
         	throw new CustomException("AI Server is busy please try again later"+ serverError.getStatusCode()); // Handle server errors
+        } catch(InputMismatchException ex) {
+          throw new CustomException("Unexpected response format from AI server: " + ex.getMessage()); // Handle unexpected response formats
         }
 
        
