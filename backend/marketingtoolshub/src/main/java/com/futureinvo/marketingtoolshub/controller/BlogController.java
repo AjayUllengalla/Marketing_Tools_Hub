@@ -21,6 +21,11 @@ public class BlogController {
 	
 	@PostMapping("/blog-title")
 	public ResponseEntity<String> blogTitleGenerator(@RequestBody @Valid BlogTitleRequest topic) {
+		if(topic.getTopic().length() < 0 || topic.getTopic() == null || topic.getTopic().isBlank() ) {
+			return ResponseEntity.badRequest().body("Topic must be entered");
+		} else if(topic.getTopic().length() > 400) {
+			return ResponseEntity.badRequest().body("Topic must be less than 400 characters");
+		}
 		return ResponseEntity.ok(blogService.generateBlogTitle(topic.getTopic()));
 	}
 	
