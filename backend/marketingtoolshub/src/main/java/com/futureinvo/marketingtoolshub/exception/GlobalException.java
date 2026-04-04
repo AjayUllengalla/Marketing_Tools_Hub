@@ -23,4 +23,8 @@ public class GlobalException {
 		String message = ex.getBindingResult().getFieldError().getDefaultMessage();
 		return ResponseEntity.badRequest().body(message);
 	}
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<?> handleInputMismatchException(Exception ex) {
+		return ResponseEntity.badRequest().body("Invalid input type");
+	}
 }
