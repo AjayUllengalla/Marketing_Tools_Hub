@@ -22,11 +22,17 @@ public class EmailController {
 	
 	@PostMapping("/email-template")
 	public ResponseEntity<String> generateEmail(@RequestBody @Valid EmailRequest topic) {
+		if(topic.getTopic().length() < 0 || topic.getTopic() == null || topic.getTopic().isBlank()) {
+			return ResponseEntity.badRequest().body("Must enter topic or related keyword");
+		}
 		return ResponseEntity.ok(emailService.generateEmail(topic.getTopic()));
 	}
 	
 	@PostMapping("/subjectline")
 	public ResponseEntity<String> generateSubjectLine(@RequestBody @Valid SubjectRequest subject) {
+		if(subject.getSubjectLine().length() < 0 || subject.getSubjectLine() == null || subject.getSubjectLine().isBlank()) {
+			return ResponseEntity.badRequest().body("Must enter topic or related keyword to get Subjecct line for email");
+		} 
 		return ResponseEntity.ok(emailService.generateSubjectLine(subject.getSubjectLine()));
 	}
 }
