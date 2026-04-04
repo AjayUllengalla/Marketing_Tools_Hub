@@ -32,7 +32,7 @@ public class SocialService {
 		} else if(description.length() < 10) {
 			throw new CustomException("Description must be at least 10 characters long"); // validation for description length
 		}
-		String prompt = "Generate a Description for post or video or reel " + description;
+		String prompt = "Generate a Description or caption  for post or video or reel for social media post " + description;
 		return gemini.generate(prompt);
 	}
 
