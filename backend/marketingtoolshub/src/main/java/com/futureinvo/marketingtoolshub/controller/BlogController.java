@@ -33,6 +33,8 @@ public class BlogController {
 	public ResponseEntity<String> blogGenerator(@RequestBody @Valid BlogRequest topic) {
 		if(topic.getBlog() == null || topic.getBlog().isBlank() || topic.getBlog().length() <=0 ) {
 			return ResponseEntity.badRequest().body("topic or related keyword must enter");
+		} else if(topic.getBlog().length() > 400) {
+			return ResponseEntity.badRequest().body("topic must be less than 400 characters");
 		}
 		return ResponseEntity.ok(blogService.generateBlog(topic.getBlog()));
 	}
