@@ -1,5 +1,9 @@
 import axios from "axios";
 
-export default axios.create({
-  baseURL: "http://localhost:8080/api/social"
+const BASE_URL = "http://localhost:8080/api";
+
+const api = axios.create({
+  baseURL: BASE_URL,
 });
+
+export default api;

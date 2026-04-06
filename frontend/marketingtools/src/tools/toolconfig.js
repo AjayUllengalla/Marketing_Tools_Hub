@@ -6,13 +6,13 @@ const tools = [
         name: "Hashtag Generator",
         path: "hashtags",
         input: "Enter keyword",
-        endpoint: "/hashtags"
+        endpoint: "/social/hashtags"
       },
       {
         name: "Caption Generator",
         path: "caption",
         input: "Enter topic",
-        endpoint: "/description"
+        endpoint: "/social/description"
       }
     ]
   },
@@ -23,13 +23,13 @@ const tools = [
         name: "Blog Title Generator",
         path: "blog-title",
         input: "Enter topic",
-        endpoint: "/blog-title"
+        endpoint: "/blog/blog-title"
       },
       {
         name: "Blog Writer",
         path: "blog-writer",
         input: "Enter topic",
-        endpoint: "/blog"
+        endpoint: "/blog/blog"
       }
     ]
   },
@@ -37,10 +37,16 @@ const tools = [
     category: "Email Tools",
     items: [
       {
+        name: "Email Template",
+        path: "email-template",
+        input: "Enter topic",
+        endpoint: "/email/email-template"
+      },
+      {
         name: "Subject Line Generator",
         path: "email-subject",
         input: "Enter topic",
-        endpoint: "/email"
+        endpoint: "/email/subjectline"
       }
     ]
   },
@@ -50,8 +56,8 @@ const tools = [
       {
         name: "UTM Builder",
         path: "utm",
-        input: "Enter URL",
-        endpoint: null
+        input: "",
+        endpoint: "/campaign/utm"
       }
     ]
   }

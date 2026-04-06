@@ -16,65 +16,86 @@ export default function ToolPage() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [utmData, setUtmData] = useState({
+    url: "",
+    source: "",
+    medium: "",
+    campaign: ""
+  });
+
   if (!tool) return <h3 className="text-center mt-4">Tool not found</h3>;
 
   const handleSubmit = async () => {
-  if (!input) {
-    toast.error("Input is required!");
-    return;
-  }
+    try {
+      setLoading(true);
 
-  try {
-  setLoading(true);
+      let requestBody = {};
 
-  let requestBody = {};
+      // SOCIAL
+      if (tool.path === "hashtags") {
+        requestBody = { keyword: input.trim() };
+      } else if (tool.path === "caption") {
+        requestBody = { description: input.trim() };
+      }
 
-  if (tool.path === "hashtags") {
-    requestBody = { keyword: input.trim() };
-  } 
-  else if (tool.path === "caption") {
-    requestBody = { description: input.trim() };
-  } 
-  else {
-    toast.error("Tool not connected yet");
-    return;
-  }
+      // BLOG
+      else if (tool.path === "blog-title") {
+        requestBody = { topic: input.trim() };
+      } else if (tool.path === "blog-writer") {
+        requestBody = { blog: input.trim() };
+      }
 
-  console.log("Sending:", requestBody);
+      // EMAIL
+      else if (tool.path === "email-template") {
+        requestBody = { topic: input.trim() };
+      } else if (tool.path === "email-subject") {
+        requestBody = { subjectLine: input.trim() };
+      }
 
-  const res = await api.post(tool.endpoint, requestBody, {
-    headers: {
-      "Content-Type": "application/json"
+      // UTM
+      else if (tool.path === "utm") {
+        if (
+          !utmData.url ||
+          !utmData.source ||
+          !utmData.medium ||
+          !utmData.campaign
+        ) {
+          toast.error("All UTM fields are required");
+          setLoading(false);
+          return;
+        }
+
+        requestBody = utmData;
+      }
+
+      console.log("Sending:", requestBody);
+
+      const res = await api.post(tool.endpoint, requestBody, {
+        headers: { "Content-Type": "application/json" }
+      });
+
+      setResult(res.data);
+      toast.success("Success!");
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+
+      if (err.response?.status === 400) {
+        toast.error(err.response.data || "Bad request");
+      } else if (err.response?.status === 500) {
+        toast.error("Server error (backend issue)");
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      setLoading(false);
     }
-  });
-
-  console.log("Response:", res.data);
-
-  setResult(res.data);
-
-  toast.success("Success!");
-} catch (err) {
-  console.error("ERROR:", err.response?.data || err.message);
-
-  if (err.response?.status === 400) {
-    toast.error("Bad request - check input format");
-  } else if (err.response?.status === 500) {
-    toast.error("Server error (backend issue)");
-  } else {
-    toast.error("Something went wrong");
-  }
-} finally {
-  setLoading(false);
-}
-};
-
-  
-  const handleCopy = () => {
-    navigator.clipboard.writeText(result);
-    toast.success("Copied to clipboard!");
   };
 
-  
+  const handleCopy = () => {
+    navigator.clipboard.writeText(result);
+    toast.success("Copied!");
+  };
+
   const handleDownload = () => {
     const blob = new Blob([result], { type: "text/plain" });
     const link = document.createElement("a");
@@ -87,20 +108,54 @@ export default function ToolPage() {
     <div className="container mt-4">
       <h2>{tool.name}</h2>
 
-      
-      <Form.Control
-        placeholder={tool.input}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className="my-3"
-      />
+      {/* NORMAL INPUT */}
+      {tool.path !== "utm" && (
+        <Form.Control
+          placeholder={tool.input}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className="my-3"
+        />
+      )}
 
-      
+      {/* UTM INPUTS */}
+      {tool.path === "utm" && (
+        <>
+          <Form.Control
+            placeholder="Website URL"
+            className="mb-2"
+            onChange={(e) =>
+              setUtmData({ ...utmData, url: e.target.value })
+            }
+          />
+          <Form.Control
+            placeholder="Source"
+            className="mb-2"
+            onChange={(e) =>
+              setUtmData({ ...utmData, source: e.target.value })
+            }
+          />
+          <Form.Control
+            placeholder="Medium"
+            className="mb-2"
+            onChange={(e) =>
+              setUtmData({ ...utmData, medium: e.target.value })
+            }
+          />
+          <Form.Control
+            placeholder="Campaign"
+            className="mb-3"
+            onChange={(e) =>
+              setUtmData({ ...utmData, campaign: e.target.value })
+            }
+          />
+        </>
+      )}
+
       <Button onClick={handleSubmit}>
         {loading ? <Spinner size="sm" /> : "Generate"}
       </Button>
 
-      
       {result && (
         <div className="mt-4 p-3 border rounded">
           <textarea
@@ -110,15 +165,13 @@ export default function ToolPage() {
             readOnly
           />
 
-          <div>
-            <button className="btn btn-success me-2" onClick={handleCopy}>
-              Copy
-            </button>
+          <button className="btn btn-success me-2" onClick={handleCopy}>
+            Copy
+          </button>
 
-            <button className="btn btn-primary" onClick={handleDownload}>
-              Download
-            </button>
-          </div>
+          <button className="btn btn-primary" onClick={handleDownload}>
+            Download
+          </button>
         </div>
       )}
     </div>
