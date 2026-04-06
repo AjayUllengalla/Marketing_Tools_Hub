@@ -4,6 +4,7 @@ import ToolPage from "./pages/toolpage";
 import AppNavbar from "./components/navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
       </Routes>
 
       <ToastContainer />
+
+      <Footer/>
     </BrowserRouter>
   );
 }

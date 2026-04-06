@@ -26,6 +26,14 @@ export default function ToolPage() {
   if (!tool) return <h3 className="text-center mt-4">Tool not found</h3>;
 
   const handleSubmit = async () => {
+
+    if (
+    tool.path !== "utm" &&
+    (!input || input.trim() === "")
+  ) {
+    toast.error("Input field is required!");
+    return;
+  }
     try {
       setLoading(true);
 

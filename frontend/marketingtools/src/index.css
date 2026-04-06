@@ -1,0 +1,24 @@
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+
+footer ul li {
+  font-size: 14px;
+  color: #bbb;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+footer ul li:hover {
+  color: #fff;
+  transition: 0.3s;
+}
+
+footer h6 {
+  margin-bottom: 10px;
+}
+
+body{
+    background: linear-gradient(rgb(196, 146, 196),rgb(169, 169, 202));
+}
