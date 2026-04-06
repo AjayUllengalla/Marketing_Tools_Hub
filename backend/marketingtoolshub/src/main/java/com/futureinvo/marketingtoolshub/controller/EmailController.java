@@ -19,7 +19,8 @@ public class EmailController {
 
 	@Autowired
 	private EmailService emailService;
-	
+
+	// This method takes an EmailRequest object as input, validates it, and returns a ResponseEntity containing the generated email template or an error message if the input is invalid.
 	@PostMapping("/email-template")
 	public ResponseEntity<String> generateEmail(@RequestBody @Valid EmailRequest topic) {
 		if(topic.getTopic().length() < 0 || topic.getTopic() == null || topic.getTopic().isBlank()) {

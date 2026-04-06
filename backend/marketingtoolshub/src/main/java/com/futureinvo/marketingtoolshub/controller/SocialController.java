@@ -27,7 +27,9 @@ public class SocialController {
 		
 		return ResponseEntity.ok(social.generateHashTags(req.getKeyword())); // response	
 	}
+		 
 	
+	// This method takes a DescriptionRequest object as input, validates it, and returns a ResponseEntity containing the generated description or an error message if the input is invalid.
 	@PostMapping("/description")
 	public ResponseEntity<String> generateDescription(@RequestBody DescriptionRequest descriptionReq){
 		
