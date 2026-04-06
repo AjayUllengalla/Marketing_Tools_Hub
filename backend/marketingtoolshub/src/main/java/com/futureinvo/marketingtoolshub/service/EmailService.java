@@ -19,7 +19,9 @@ public class EmailService {
 		return geminiService.generate(prompt);
 		} catch(InputMismatchException ex) {
 			throw new CustomException("Must Enter valid keywords or characters");
-		}
+		} catch (Exception e) {
+			throw new CustomException("Error while generating email: " + e.getMessage());
+		}	
 		
 	}
 	
@@ -29,6 +31,8 @@ public class EmailService {
 		return geminiService.generate(prompt);
 		} catch(InputMismatchException ex) {
 			throw new CustomException("Must Enter valid keywords or characters");
+		} catch (Exception e) {
+			throw new CustomException("Error while generating subject line: " + e.getMessage());
 		}
 	}
 }
