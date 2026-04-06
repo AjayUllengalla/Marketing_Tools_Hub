@@ -13,7 +13,7 @@ import com.futureinvo.marketingtoolshub.service.UTMService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/compaign")
+@RequestMapping("api/campaign")
 public class UTMController {
 	
 	@Autowired
