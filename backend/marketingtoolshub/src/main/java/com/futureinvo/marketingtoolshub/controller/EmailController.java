@@ -24,6 +24,8 @@ public class EmailController {
 	public ResponseEntity<String> generateEmail(@RequestBody @Valid EmailRequest topic) {
 		if(topic.getTopic().length() < 0 || topic.getTopic() == null || topic.getTopic().isBlank()) {
 			return ResponseEntity.badRequest().body("Must enter topic or related keyword");
+		} else if(topic.getTopic().length() > 200) {
+			return ResponseEntity.badRequest().body("Topic must be less than 200 characters");
 		}
 		return ResponseEntity.ok(emailService.generateEmail(topic.getTopic()));
 	}
@@ -32,7 +34,9 @@ public class EmailController {
 	public ResponseEntity<String> generateSubjectLine(@RequestBody @Valid SubjectRequest subject) {
 		if(subject.getSubjectLine().length() < 0 || subject.getSubjectLine() == null || subject.getSubjectLine().isBlank()) {
 			return ResponseEntity.badRequest().body("Must enter topic or related keyword to get Subjecct line for email");
-		} 
+		} else if(subject.getSubjectLine().length() > 300) {
+			return ResponseEntity.badRequest().body("charcters should be less than 300 charcters");
+		}
 		return ResponseEntity.ok(emailService.generateSubjectLine(subject.getSubjectLine()));
 	}
 }

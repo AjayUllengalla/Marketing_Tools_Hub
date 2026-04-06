@@ -1,12 +1,12 @@
 package com.futureinvo.marketingtoolshub.dto;
 
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class EmailRequest {
 
-	@Valid
+	@NotBlank(message = "topic must be entered")
 	private String topic;
 
 	public String getTopic() {

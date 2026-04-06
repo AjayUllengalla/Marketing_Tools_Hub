@@ -1,12 +1,12 @@
 package com.futureinvo.marketingtoolshub.dto;
 
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class BlogRequest {
 
-	@Valid
+	@NotBlank(message = "Blog content cannot be null or empty")
 	private String blog;
 
 	public String getBlog() {
