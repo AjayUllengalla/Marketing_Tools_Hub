@@ -114,74 +114,138 @@ export default function ToolPage() {
 
   return (
     <div className="container mt-4">
-      <h2>{tool.name}</h2>
+      <div className="tool-page-header mb-4">
+        <h2 className="mb-1">{tool.name}</h2>
+        <p className="text-muted small mb-0">
+          Fill in the fields below and click <span className="fw-semibold">Generate</span> to get your result.
+        </p>
+      </div>
 
-      {/* NORMAL INPUT */}
-      {tool.path !== "utm" && (
-        <Form.Control
-          placeholder={tool.input}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="my-3"
-        />
-      )}
+      <div className="row g-4">
+        <div className="col-lg-5">
+          <div className="card shadow-sm tool-input-card">
+            <div className="card-body">
+              {tool.path !== "utm" && (
+                <Form.Group controlId="toolInput">
+                  <Form.Label className="fw-semibold small text-uppercase text-muted">
+                    Input
+                  </Form.Label>
+                  <Form.Control
+                    placeholder={tool.input}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    className="mt-1"
+                  />
+                </Form.Group>
+              )}
 
-      {/* UTM INPUTS */}
-      {tool.path === "utm" && (
-        <>
-          <Form.Control
-            placeholder="Website URL"
-            className="mb-2"
-            onChange={(e) =>
-              setUtmData({ ...utmData, url: e.target.value })
-            }
-          />
-          <Form.Control
-            placeholder="Source"
-            className="mb-2"
-            onChange={(e) =>
-              setUtmData({ ...utmData, source: e.target.value })
-            }
-          />
-          <Form.Control
-            placeholder="Medium"
-            className="mb-2"
-            onChange={(e) =>
-              setUtmData({ ...utmData, medium: e.target.value })
-            }
-          />
-          <Form.Control
-            placeholder="Campaign"
-            className="mb-3"
-            onChange={(e) =>
-              setUtmData({ ...utmData, campaign: e.target.value })
-            }
-          />
-        </>
-      )}
+              {tool.path === "utm" && (
+                <>
+                  <Form.Group className="mb-3" controlId="utmUrl">
+                    <Form.Label className="fw-semibold small text-uppercase text-muted">
+                      Website URL
+                    </Form.Label>
+                    <Form.Control
+                      placeholder="https://your-landing-page.com"
+                      onChange={(e) =>
+                        setUtmData({ ...utmData, url: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="utmSource">
+                    <Form.Label className="fw-semibold small text-uppercase text-muted">
+                      Source
+                    </Form.Label>
+                    <Form.Control
+                      placeholder="e.g. facebook, newsletter"
+                      onChange={(e) =>
+                        setUtmData({ ...utmData, source: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="utmMedium">
+                    <Form.Label className="fw-semibold small text-uppercase text-muted">
+                      Medium
+                    </Form.Label>
+                    <Form.Control
+                      placeholder="e.g. cpc, email, social"
+                      onChange={(e) =>
+                        setUtmData({ ...utmData, medium: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-1" controlId="utmCampaign">
+                    <Form.Label className="fw-semibold small text-uppercase text-muted">
+                      Campaign
+                    </Form.Label>
+                    <Form.Control
+                      placeholder="e.g. summer_sale_2026"
+                      onChange={(e) =>
+                        setUtmData({ ...utmData, campaign: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </>
+              )}
 
-      <Button onClick={handleSubmit}>
-        {loading ? <Spinner size="sm" /> : "Generate"}
-      </Button>
-
-      {result && (
-        <div className="mt-4 p-3 border rounded">
-          <textarea
-            className="form-control mb-2"
-            rows={6}
-            value={result}
-            readOnly
-          />
-
-          <button className="btn btn-success me-2" onClick={handleCopy}>
-            Copy
-          </button>
-
-          <button className="btn btn-primary" onClick={handleDownload}>
-            Download
-          </button>
+              <div className="mt-3 d-flex justify-content-between align-items-center">
+                <Button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  variant="primary"
+                  className="px-4"
+                >
+                  {loading ? (
+                    <>
+                      <Spinner size="sm" className="me-2" />
+                      Generating...
+                    </>
+                  ) : (
+                    "Generate"
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
+
+        <div className="col-lg-7">
+          {result && (
+            <div className="card shadow-sm tool-result-card h-100">
+              <div className="card-body d-flex flex-column">
+                <div className="d-flex justify-content-between align-items-center mb-2">
+                  <h6 className="mb-0 text-uppercase small text-muted">
+                    Output
+                  </h6>
+                  <div>
+                    <button
+                      className="btn btn-outline-success btn-sm me-2"
+                      onClick={handleCopy}
+                    >
+                      Copy
+                    </button>
+
+                    <button
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={handleDownload}
+                    >
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+                <textarea
+                  className="form-control flex-grow-1"
+                  rows={10}
+                  value={result}
+                  readOnly
+                  style={{ resize: "vertical" }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

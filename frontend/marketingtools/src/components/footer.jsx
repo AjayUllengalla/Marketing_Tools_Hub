@@ -1,15 +1,14 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useNavigate,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
-  const navigate = useNavigate();
   return (
     <footer
       style={{
-        background: "#111",
+        background: "#0b0b0f",
         color: "#fff",
-        padding: "40px 0",
+        padding: "40px 0 20px",
         marginTop: "50px",
       }}
     >
@@ -18,8 +17,8 @@ export default function Footer() {
         <Row>
 
           
-          <Col md={3}>
-            <h5> ToolsHub</h5>
+          <Col md={3} className="mb-4 mb-md-0">
+            <h5 className="mb-3">ToolsHub</h5>
             <p style={{ fontSize: "14px", color: "#bbb" }}>
               Your all-in-one platform for marketing tools like hashtags,
               blogs, email templates, and campaign builders.
@@ -27,8 +26,8 @@ export default function Footer() {
           </Col>
 
           
-          <Col md={3}>
-            <h6>Tools</h6>
+          <Col md={3} className="mb-4 mb-md-0">
+            <h6 className="footer-heading">Tools</h6>
             <ul className="list-unstyled">
               <li><Link to="/tool/hashtags">Hashtag Generator</Link></li>
               <li><Link to="/tool/blog-title">Blog Title</Link></li>
@@ -38,8 +37,8 @@ export default function Footer() {
           </Col>
 
           
-          <Col md={3}>
-            <h6>Company</h6>
+          <Col md={3} className="mb-4 mb-md-0">
+            <h6 className="footer-heading">Company</h6>
             <ul className="list-unstyled">
               <li>About Us</li>
               <li>Careers</li>
@@ -49,8 +48,8 @@ export default function Footer() {
           </Col>
 
           
-          <Col md={3}>
-            <h6>Support</h6>
+          <Col md={3} className="mb-4 mb-md-0">
+            <h6 className="footer-heading">Support</h6>
             <ul className="list-unstyled">
               <li>Help Center</li>
               <li>Contact</li>

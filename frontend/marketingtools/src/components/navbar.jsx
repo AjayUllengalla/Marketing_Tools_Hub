@@ -2,6 +2,7 @@ import { Navbar, Nav, Container, NavDropdown, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import tools from "../tools/toolconfig";
 import { useState } from "react";
+import logo from "../assets/logo.svg";
 
 export default function AppNavbar() {
   const navigate = useNavigate();
@@ -16,7 +17,12 @@ export default function AppNavbar() {
   );
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm sticky-top">
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
+      className="shadow-sm sticky-top py-2 navbar-glass"
+    >
       <Container>
 
         
@@ -24,12 +30,28 @@ export default function AppNavbar() {
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          <span><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/G6fuUQTNiFdQnj5S/logo-Idhelh6KDFsmOxlF.JPG" height={59} width={190} style={{borderRadius:"10px"}}/></span>
+          <span className="d-flex align-items-center">
+            <img
+              src={logo}
+              height={36}
+              width={36}
+              style={{ borderRadius: "999px" }}
+              alt="ToolsHub"
+            />
+            <span className="ms-2 fw-semibold text-white d-none d-md-inline">
+              Marketing Tools Hub
+            </span>
+          </span>
         </Navbar.Brand>
 
         
-        <Nav className="me-auto">
-          <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
+        <Nav className="me-auto align-items-lg-center">
+          <Nav.Link
+            onClick={() => navigate("/")}
+            className="nav-link-accent"
+          >
+            Home
+          </Nav.Link>
         </Nav>
 
         <Navbar.Toggle />
@@ -40,15 +62,16 @@ export default function AppNavbar() {
 
             {tools.map((category, i) => (
               <NavDropdown
-                key={i}
+                key={category.category}
                 title={category.category}
                 show={openDropdown === i}
                 onMouseEnter={() => setOpenDropdown(i)}
                 onMouseLeave={() => setOpenDropdown(null)}
+                className="text-capitalize"
               >
                 {category.items.map((tool, idx) => (
                   <NavDropdown.Item
-                    key={idx}
+                    key={tool.path || idx}
                     onClick={() => navigate(`/tool/${tool.path}`)}
                   >
                     {tool.name}
@@ -60,39 +83,35 @@ export default function AppNavbar() {
           </Nav>
 
           
-          <Form className="d-flex position-relative">
+          <Form className="d-flex position-relative navbar-search">
             <Form.Control
               type="search"
               placeholder="Search tools..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              className="rounded-pill ps-4 search-input"
             />
 
             {search && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "40px",
-                  background: "white",
-                  width: "100%",
-                  zIndex: 1000,
-                  borderRadius: "5px",
-                  maxHeight: "200px",
-                  overflowY: "auto"
-                }}
-              >
+              <div className="search-dropdown shadow-sm">
                 {filteredTools.length > 0 ? (
                   filteredTools.map((tool, i) => (
                     <div
-                      key={i}
-                      style={{
-                        padding: "8px",
-                        cursor: "pointer",
-                        borderBottom: "1px solid #eee"
-                      }}
+                      key={tool.path || i}
+                      className="search-result-item"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Open ${tool.name}`}
                       onClick={() => {
                         navigate(`/tool/${tool.path}`);
                         setSearch("");
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          navigate(`/tool/${tool.path}`);
+                          setSearch("");
+                        }
                       }}
                     >
                       {tool.name}
