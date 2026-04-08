@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import tools from "../tools/toolconfig";
 import { useState } from "react";
 import api from "../services/api";
-import { Button, Form, Spinner } from "react-bootstrap";
+import { Badge, Button, Form, Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { FaBolt, FaCopy, FaDownload } from "react-icons/fa6";
 
 export default function ToolPage() {
   const { name } = useParams();
@@ -114,17 +115,23 @@ export default function ToolPage() {
 
   return (
     <div className="container mt-4">
-      <div className="tool-page-header mb-4">
-        <h2 className="mb-1">{tool.name}</h2>
-        <p className="text-muted small mb-0">
-          Fill in the fields below and click <span className="fw-semibold">Generate</span> to get your result.
-        </p>
+      <div className="tool-page-header mb-4 d-flex justify-content-between align-items-start gap-3 flex-wrap">
+        <div>
+          <h2 className="mb-1">{tool.name}</h2>
+          <p className="text-muted small mb-0">
+            Fill in the fields below and click{" "}
+            <span className="fw-semibold">Generate</span> to get your result.
+          </p>
+        </div>
+        <Badge bg="primary" className="badge-soft">
+          Powered by ToolsHub
+        </Badge>
       </div>
 
       <div className="row g-4">
         <div className="col-lg-5">
-          <div className="card shadow-sm tool-input-card">
-            <div className="card-body">
+          <div className="card tool-input-card">
+            <div className="card-body p-4">
               {tool.path !== "utm" && (
                 <Form.Group controlId="toolInput">
                   <Form.Label className="fw-semibold small text-uppercase text-muted">
@@ -193,7 +200,7 @@ export default function ToolPage() {
                   onClick={handleSubmit}
                   disabled={loading}
                   variant="primary"
-                  className="px-4"
+                  className="px-4 btn-saas"
                 >
                   {loading ? (
                     <>
@@ -201,7 +208,10 @@ export default function ToolPage() {
                       Generating...
                     </>
                   ) : (
-                    "Generate"
+                    <>
+                      <FaBolt className="me-2" />
+                      Generate
+                    </>
                   )}
                 </Button>
               </div>
@@ -210,40 +220,66 @@ export default function ToolPage() {
         </div>
 
         <div className="col-lg-7">
-          {result && (
-            <div className="card shadow-sm tool-result-card h-100">
-              <div className="card-body d-flex flex-column">
-                <div className="d-flex justify-content-between align-items-center mb-2">
-                  <h6 className="mb-0 text-uppercase small text-muted">
-                    Output
-                  </h6>
-                  <div>
-                    <button
-                      className="btn btn-outline-success btn-sm me-2"
-                      onClick={handleCopy}
-                    >
-                      Copy
-                    </button>
+          <div className="card tool-result-card h-100">
+            <div className="card-body d-flex flex-column p-4">
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h6 className="mb-0 text-uppercase small text-muted">
+                  Output
+                </h6>
+                <div className="d-flex gap-2">
+                  <button
+                    className="btn btn-outline-success btn-sm btn-saas-outline"
+                    onClick={handleCopy}
+                    disabled={!result}
+                  >
+                    <FaCopy className="me-2" />
+                    Copy
+                  </button>
 
-                    <button
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={handleDownload}
-                    >
-                      Download
-                    </button>
+                  <button
+                    className="btn btn-outline-primary btn-sm btn-saas-outline"
+                    onClick={handleDownload}
+                    disabled={!result}
+                  >
+                    <FaDownload className="me-2" />
+                    Download
+                  </button>
+                </div>
+              </div>
+
+              {loading && (
+                <div className="tool-skeleton flex-grow-1">
+                  <div className="skeleton-line w-100" />
+                  <div className="skeleton-line w-95" />
+                  <div className="skeleton-line w-90" />
+                  <div className="skeleton-line w-100" />
+                  <div className="skeleton-line w-80" />
+                </div>
+              )}
+
+              {!loading && !result && (
+                <div className="tool-empty-state flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center">
+                  <div className="empty-icon mb-3" aria-hidden="true">
+                    <FaBolt />
+                  </div>
+                  <div className="fw-semibold mb-1">Your output will appear here</div>
+                  <div className="text-muted small">
+                    Enter input on the left, then click Generate.
                   </div>
                 </div>
+              )}
 
+              {!!result && (
                 <textarea
-                  className="form-control flex-grow-1"
+                  className="form-control flex-grow-1 tool-output"
                   rows={10}
                   value={result}
                   readOnly
                   style={{ resize: "vertical" }}
                 />
-              </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

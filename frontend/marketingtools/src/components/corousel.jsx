@@ -1,4 +1,4 @@
-import { Carousel } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export default function CarouselSection() {
@@ -6,8 +6,7 @@ export default function CarouselSection() {
 
   return (
     <div className="hero-carousel-wrapper mb-4">
-      <Carousel className="hero-carousel" indicators={false}>
-
+      <Carousel className="hero-carousel" indicators={true}>
         <Carousel.Item
           onClick={() => navigate("/tool/hashtags")}
           style={{ cursor: "pointer" }}
@@ -21,17 +20,33 @@ export default function CarouselSection() {
             }
           }}
         >
-          <img
-            className="d-block w-100"
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmKNp8shKXsqfNQ87-jO3-9zPoT6shC8OVi5v2NwxlSIc_5Hz8jrGyyvQSWQK-QzIGf0H6_axp3AeY_ku-tr0FYaG2YpD9RirHpAx_-yFeHbUDP2pfPMmqnrDD5hDV03SNgZdvDFD-Vw0yup2YHwqW14qruDljhJmVu6dNB6RCraHkcoYLgy1hwMxF3CKk/s1600/Hashtag_Generator_Tools.webp"
-            alt="Social Tools"  height={400}
-          />
-          <Carousel.Caption>
-            <h3 className="fw-semibold">Social Tools</h3>
-            <p className="d-none d-md-block">
-              Generate engaging hashtags to boost your social reach.
-            </p>
-          </Carousel.Caption>
+          <div className="hero-slide">
+            <div className="hero-slide-media">
+              <img
+                className="hero-slide-img"
+                src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80"
+                alt="Social marketing"
+              />
+            </div>
+            <div className="hero-slide-content">
+              <div className="hero-slide-inner">
+                <h2 className="hero-slide-title">Social Tools</h2>
+                <p className="hero-slide-lead">
+                  Generate high-impact hashtags in seconds to grow reach and engagement.
+                </p>
+                <Button
+                  className="carousel-cta rounded-pill"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate("/tool/hashtags");
+                  }}
+                >
+                  Generate Hashtags
+                </Button>
+              </div>
+            </div>
+          </div>
         </Carousel.Item>
 
         <Carousel.Item
@@ -47,17 +62,33 @@ export default function CarouselSection() {
             }
           }}
         >
-        <img
-          className="d-block w-100"
-          src="https://img.freepik.com/premium-vector/blogging-concept-picture-hands-laptop-various-tools-writers-around_80590-10030.jpg?semt=ais_incoming&w=740&q=80"
-          alt="Content Tools" height={400}
-        />
-        <Carousel.Caption>
-          <h3 className="fw-semibold">Content Tools</h3>
-          <p className="d-none d-md-block">
-            Craft compelling blog titles and long-form content in seconds.
-          </p>
-        </Carousel.Caption>
+          <div className="hero-slide">
+            <div className="hero-slide-media">
+              <img
+                className="hero-slide-img"
+                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=80"
+                alt="Content writing"
+              />
+            </div>
+            <div className="hero-slide-content">
+              <div className="hero-slide-inner">
+                <h2 className="hero-slide-title">Content Tools</h2>
+                <p className="hero-slide-lead">
+                  Produce click-worthy blog titles and sharpen your content strategy.
+                </p>
+                <Button
+                  className="carousel-cta rounded-pill"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate("/tool/blog-title");
+                  }}
+                >
+                  Create Blog Titles
+                </Button>
+              </div>
+            </div>
+          </div>
         </Carousel.Item>
 
         <Carousel.Item
@@ -73,19 +104,34 @@ export default function CarouselSection() {
             }
           }}
         >
-        <img
-          className="d-block w-100"
-          src="https://wpconcern.com/wp-content/uploads/2022/04/best-email-marketing-tools.png"
-          alt="Email Tools" height={400}
-        />
-        <Carousel.Caption>
-          <h3 className="fw-semibold">Email Tools</h3>
-          <p className="d-none d-md-block">
-            Build high-converting email templates and subject lines.
-          </p>
-        </Carousel.Caption>
+          <div className="hero-slide">
+            <div className="hero-slide-media">
+              <img
+                className="hero-slide-img"
+                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=80"
+                alt="Email marketing"
+              />
+            </div>
+            <div className="hero-slide-content">
+              <div className="hero-slide-inner">
+                <h2 className="hero-slide-title">Email Tools</h2>
+                <p className="hero-slide-lead">
+                  Build conversion-focused templates and compelling subject lines.
+                </p>
+                <Button
+                  className="carousel-cta rounded-pill"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate("/tool/email-template");
+                  }}
+                >
+                  Draft Email Template
+                </Button>
+              </div>
+            </div>
+          </div>
         </Carousel.Item>
-
 
         <Carousel.Item
           onClick={() => navigate("/tool/utm")}
@@ -100,17 +146,33 @@ export default function CarouselSection() {
             }
           }}
         >
-        <img
-          className="d-block w-100"
-          src="https://www.plerdy.com/wp-content/uploads/2023/03/UTM-Builder-min.png"
-          alt="Content Tools" height={400}
-        />
-        <Carousel.Caption>
-          <h3 className="fw-semibold">UTM Builder</h3>
-          <p className="d-none d-md-block">
-            Quickly generate clean tracking links for your campaigns.
-          </p>
-        </Carousel.Caption>
+          <div className="hero-slide">
+            <div className="hero-slide-media">
+              <img
+                className="hero-slide-img"
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+                alt="Campaign analytics"
+              />
+            </div>
+            <div className="hero-slide-content">
+              <div className="hero-slide-inner">
+                <h2 className="hero-slide-title">UTM Builder</h2>
+                <p className="hero-slide-lead">
+                  Generate clean tracking links so you can measure what matters.
+                </p>
+                <Button
+                  className="carousel-cta rounded-pill"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate("/tool/utm");
+                  }}
+                >
+                  Build Tracking Links
+                </Button>
+              </div>
+            </div>
+          </div>
         </Carousel.Item>
 
       </Carousel>

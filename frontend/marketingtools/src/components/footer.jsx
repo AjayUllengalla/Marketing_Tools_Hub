@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "#0b0b0f",
-        color: "#fff",
+        background: "#ffffff",
+        color: "#334155",
         padding: "40px 0 20px",
         marginTop: "50px",
       }}
@@ -60,7 +60,7 @@ export default function Footer() {
         </Row>
 
         
-        <hr style={{ borderColor: "#444" }} />
+        <hr style={{ borderColor: "#edf2f7" }} />
 
         <Row className="align-items-center">
           <Col md={6}>

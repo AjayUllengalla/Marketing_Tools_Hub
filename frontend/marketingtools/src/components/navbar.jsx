@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, NavDropdown, Form } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import tools from "../tools/toolconfig";
 import { useState } from "react";
@@ -18,10 +18,10 @@ export default function AppNavbar() {
 
   return (
     <Navbar
-      bg="dark"
-      variant="dark"
+      bg="light"
+      variant="light"
       expand="lg"
-      className="shadow-sm sticky-top py-2 navbar-glass"
+      className="shadow-sm sticky-top py-2 navbar-premium"
     >
       <Container>
 
@@ -38,7 +38,7 @@ export default function AppNavbar() {
               style={{ borderRadius: "999px" }}
               alt="ToolsHub"
             />
-            <span className="ms-2 fw-semibold text-white d-none d-md-inline">
+            <span className="ms-2 fw-semibold brand-name d-none d-md-inline">
               Marketing Tools Hub
             </span>
           </span>
@@ -83,48 +83,57 @@ export default function AppNavbar() {
           </Nav>
 
           
-          <Form className="d-flex position-relative navbar-search">
-            <Form.Control
-              type="search"
-              placeholder="Search tools..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="rounded-pill ps-4 search-input"
-            />
+          <div className="d-flex align-items-center gap-3 ms-lg-3">
+            <Form className="d-flex position-relative navbar-search">
+              <Form.Control
+                type="search"
+                placeholder="Search tools..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="rounded-pill ps-4 search-input"
+              />
 
-            {search && (
-              <div className="search-dropdown shadow-sm">
-                {filteredTools.length > 0 ? (
-                  filteredTools.map((tool, i) => (
-                    <div
-                      key={tool.path || i}
-                      className="search-result-item"
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`Open ${tool.name}`}
-                      onClick={() => {
-                        navigate(`/tool/${tool.path}`);
-                        setSearch("");
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
+              {search && (
+                <div className="search-dropdown shadow-sm">
+                  {filteredTools.length > 0 ? (
+                    filteredTools.map((tool, i) => (
+                      <div
+                        key={tool.path || i}
+                        className="search-result-item"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Open ${tool.name}`}
+                        onClick={() => {
                           navigate(`/tool/${tool.path}`);
                           setSearch("");
-                        }
-                      }}
-                    >
-                      {tool.name}
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            navigate(`/tool/${tool.path}`);
+                            setSearch("");
+                          }
+                        }}
+                      >
+                        {tool.name}
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ padding: "8px" }}>
+                      No tools found
                     </div>
-                  ))
-                ) : (
-                  <div style={{ padding: "8px" }}>
-                    No tools found
-                  </div>
-                )}
-              </div>
-            )}
-          </Form>
+                  )}
+                </div>
+              )}
+            </Form>
+
+            <Button
+              className="btn-get-started rounded-pill px-4 py-2 btn-saas"
+              onClick={() => navigate("/tool/hashtags")}
+            >
+              Get Started
+            </Button>
+          </div>
 
         </Navbar.Collapse>
       </Container>
