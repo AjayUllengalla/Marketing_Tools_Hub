@@ -73,33 +73,32 @@ export default function Footer() {
         .footer-section {
           padding: 60px 0;
           margin-top: 60px;
-          background: linear-gradient(135deg, #5f9cff, #7b5cff, #4facfe);
+          background: linear-gradient(135deg, #f9fafb, #e0f2fe, #ede9fe);
         }
 
         
         .glass-footer {
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(15px);
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(10px);
           border-radius: 20px;
           padding: 40px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-          color: white;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+          color: #1e293b;
         }
 
         .logo {
-          color: #ffffff;
-          font-weight: bold;
+          color: #1e293b;
+          font-weight: 600;
         }
 
         .footer-text {
           font-size: 14px;
-          color: #f8fafc;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+          color: #475569;
         }
 
        
         .footer-heading {
-          color: #ffe082;
+          color: #4f46e5; 
           margin-bottom: 12px;
           font-weight: 600;
         }
@@ -107,13 +106,11 @@ export default function Footer() {
         
         .footer-links li {
           margin-bottom: 8px;
-          color: white;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         .footer-links a {
           text-decoration: none;
-          color: white;
+          color: #334155; 
           font-size: 14px;
           transition: 0.3s;
         }
@@ -129,23 +126,22 @@ export default function Footer() {
           font-size: 18px;
           cursor: pointer;
           transition: 0.3s;
-          color: white;
+          color: #334155;
         }
 
         .social-icons svg:hover {
-          color: #1d4ed8;
+          color: #2563eb;
           transform: scale(1.2);
         }
 
         hr {
-          border-color: rgba(255,255,255,0.4);
+          border-color: rgba(0,0,0,0.1);
           margin: 30px 0;
         }
 
         .copyright {
           font-size: 14px;
-          color: #f8fafc;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+          color: #475569;
         }
 
         @media (max-width: 768px) {
