@@ -12,6 +12,7 @@ The application provides marketing utility endpoints and a user interface to acc
 ## Developers
 
 - Ajay
+- Gayathri
 
 
 ## Backend (Spring Boot)
