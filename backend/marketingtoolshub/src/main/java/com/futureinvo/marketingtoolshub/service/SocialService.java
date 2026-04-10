@@ -50,7 +50,7 @@ public class SocialService {
 					"Use an engaging but authentic tone and naturally integrate the keyword: '";
 			return gemini.generate(prompt);
 		} catch (Exception e) {
-			throw new CustomException("Error while generating description: " + e.getMessage());
+			throw new CustomException("Error while generating description or caption: " + e.getMessage());
 		}
 	}
 
