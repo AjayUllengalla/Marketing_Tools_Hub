@@ -1,5 +1,7 @@
 package com.futureinvo.marketingtoolshub.service;
 
+import java.util.InputMismatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ public class SocialService {
 					+
 					"Ensure they use #CamelCase for accessibility and prioritize keywords that users actually type into social search bars.";
 			return gemini.generate(prompt);
+		} catch(InputMismatchException	 ex) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
 			throw new CustomException("Error while generating hashtags: " + e.getMessage());
 		}
@@ -49,6 +53,8 @@ public class SocialService {
 					+
 					"Use an engaging but authentic tone and naturally integrate the keyword: '";
 			return gemini.generate(prompt);
+		} catch(InputMismatchException ex) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
 			throw new CustomException("Error while generating description or caption: " + e.getMessage());
 		}

@@ -1,5 +1,7 @@
 package com.futureinvo.marketingtoolshub.service;
 
+import java.util.InputMismatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,10 @@ public class BlogService {
 					"and 3. A 'Key Takeaways' summary section. " +
 					"Ensure the titles are under 60 characters and include the primary keyword: '" + topic + "'.";
 			return geminiService.generate(prompt);
+		} catch (InputMismatchException e) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
-			throw new CustomException("Error while generating " + e.getMessage());
+			throw new CustomException("Error while generating blog title: " + e.getMessage());
 		}
 
 	}
@@ -39,6 +43,8 @@ public class BlogService {
 					+
 					"Maintain a [Professional/Conversational] tone, avoid fluff, and ensure a high 'Perplexity' and 'Burstiness' score for human-like flow.";
 			return geminiService.generate(prompt);
+		}  catch (InputMismatchException e) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
 			throw new CustomException("Error while generating blog: " + e.getMessage());
 		}
