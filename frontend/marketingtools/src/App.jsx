@@ -2,24 +2,36 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import ToolPage from "./pages/toolpage";
 import AppNavbar from "./components/navbar";
+import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/footer";
+
+// NEW: animation + smooth scroll
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = "smooth";
+  }, []);
+
   return (
-    <BrowserRouter>
-      <AppNavbar />
+    <div className="app-container">
+      <BrowserRouter>
+        <AppNavbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tool/:name" element={<ToolPage />} />
-      </Routes>
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tool/:name" element={<ToolPage />} />
+          </Routes>
+        </div>
 
-      <ToastContainer />
+        <ToastContainer position="top-right" autoClose={2000} />
 
-      <Footer/>
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

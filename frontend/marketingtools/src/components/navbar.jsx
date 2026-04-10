@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import tools from "../tools/toolconfig";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/logo.svg";
 
 export default function AppNavbar() {
@@ -9,6 +9,7 @@ export default function AppNavbar() {
 
   const [search, setSearch] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const allTools = tools.flatMap(cat => cat.items);
 
@@ -16,16 +17,23 @@ export default function AppNavbar() {
     tool.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // NEW: scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <Navbar
-      bg="light"
-      variant="light"
       expand="lg"
-      className="shadow-sm sticky-top py-2 navbar-premium"
+      className={`sticky-top py-2 navbar-premium ${scrolled ? "navbar-scrolled" : ""}`}
     >
       <Container>
 
-        
+        {/* LOGO */}
         <Navbar.Brand
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -44,7 +52,6 @@ export default function AppNavbar() {
           </span>
         </Navbar.Brand>
 
-        
         <Nav className="me-auto align-items-lg-center">
           <Nav.Link
             onClick={() => navigate("/")}
@@ -57,9 +64,9 @@ export default function AppNavbar() {
         <Navbar.Toggle />
 
         <Navbar.Collapse>
-          
-          <Nav className="me-auto">
 
+          {/* DROPDOWNS */}
+          <Nav className="me-auto">
             {tools.map((category, i) => (
               <NavDropdown
                 key={category.category}
@@ -67,22 +74,22 @@ export default function AppNavbar() {
                 show={openDropdown === i}
                 onMouseEnter={() => setOpenDropdown(i)}
                 onMouseLeave={() => setOpenDropdown(null)}
-                className="text-capitalize"
+                className="text-capitalize nav-dropdown-premium"
               >
                 {category.items.map((tool, idx) => (
                   <NavDropdown.Item
                     key={tool.path || idx}
                     onClick={() => navigate(`/tool/${tool.path}`)}
+                    className="dropdown-item-premium"
                   >
                     {tool.name}
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
             ))}
-
           </Nav>
 
-          
+          {/* SEARCH + CTA */}
           <div className="d-flex align-items-center gap-3 ms-lg-3">
             <Form className="d-flex position-relative navbar-search">
               <Form.Control
@@ -102,7 +109,6 @@ export default function AppNavbar() {
                         className="search-result-item"
                         role="button"
                         tabIndex={0}
-                        aria-label={`Open ${tool.name}`}
                         onClick={() => {
                           navigate(`/tool/${tool.path}`);
                           setSearch("");

@@ -17,7 +17,6 @@ export default function Footer() {
             </p>
           </Col>
 
-          
           <Col md={3} className="mb-4 mb-md-0">
             <h6 className="footer-heading">Tools</h6>
             <ul className="list-unstyled footer-links">
@@ -28,7 +27,6 @@ export default function Footer() {
             </ul>
           </Col>
 
-          
           <Col md={3} className="mb-4 mb-md-0">
             <h6 className="footer-heading">Company</h6>
             <ul className="list-unstyled footer-links">
@@ -39,7 +37,6 @@ export default function Footer() {
             </ul>
           </Col>
 
-         
           <Col md={3} className="mb-4 mb-md-0">
             <h6 className="footer-heading">Support</h6>
             <ul className="list-unstyled footer-links">
@@ -60,88 +57,83 @@ export default function Footer() {
 
         <hr />
 
-        
         <p className="copyright text-center">
           © 2026 ToolsHub. All rights reserved.
         </p>
 
       </Container>
 
-      
+      {/* UPDATED PREMIUM CSS */}
       <style>
         {`
         .footer-section {
-          padding: 60px 0;
-          margin-top: 60px;
-          background: linear-gradient(135deg, #f9fafb, #e0f2fe, #ede9fe);
+          padding: 80px 0;
+          margin-top: 80px;
+          background: radial-gradient(circle at 30% 30%, #1a1a2e, #0f0f1b);
         }
 
-        
         .glass-footer {
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(14px);
           border-radius: 20px;
-          padding: 40px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-          color: #1e293b;
+          padding: 50px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #ffffff;
         }
 
         .logo {
-          color: #1e293b;
+          color: #ffffff;
           font-weight: 600;
         }
 
         .footer-text {
           font-size: 14px;
-          color: #475569;
+          color: #aaa;
         }
 
-       
         .footer-heading {
-          color: #4f46e5; 
+          color: #6c5ce7;
           margin-bottom: 12px;
           font-weight: 600;
         }
 
-        
         .footer-links li {
-          margin-bottom: 8px;
+          margin-bottom: 10px;
         }
 
         .footer-links a {
           text-decoration: none;
-          color: #334155; 
+          color: #ccc;
           font-size: 14px;
-          transition: 0.3s;
+          transition: all 0.3s ease;
         }
 
         .footer-links a:hover {
-          color: #1d4ed8;
-          padding-left: 5px;
+          color: #ffffff;
+          padding-left: 6px;
         }
 
-       
         .social-icons svg {
-          margin-right: 10px;
+          margin-right: 12px;
           font-size: 18px;
           cursor: pointer;
-          transition: 0.3s;
-          color: #334155;
+          transition: all 0.3s ease;
+          color: #bbb;
         }
 
         .social-icons svg:hover {
-          color: #2563eb;
+          color: #6c5ce7;
           transform: scale(1.2);
         }
 
         hr {
-          border-color: rgba(0,0,0,0.1);
+          border-color: rgba(255, 255, 255, 0.1);
           margin: 30px 0;
         }
 
         .copyright {
           font-size: 14px;
-          color: #475569;
+          color: #aaa;
         }
 
         @media (max-width: 768px) {

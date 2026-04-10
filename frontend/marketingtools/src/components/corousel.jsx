@@ -23,7 +23,7 @@ export default function CarouselSection() {
           <div className="hero-slide">
             <div className="hero-slide-media">
               <img
-                className="hero-slide-img"
+                className=" d-block w-100"
                 src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80"
                 alt="Social marketing"
               />
@@ -65,7 +65,7 @@ export default function CarouselSection() {
           <div className="hero-slide">
             <div className="hero-slide-media">
               <img
-                className="hero-slide-img"
+                className=" d-block w-100"
                 src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=80"
                 alt="Content writing"
               />
@@ -107,7 +107,7 @@ export default function CarouselSection() {
           <div className="hero-slide">
             <div className="hero-slide-media">
               <img
-                className="hero-slide-img"
+                className=" d-block w-100"
                 src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=80"
                 alt="Email marketing"
               />
@@ -149,7 +149,7 @@ export default function CarouselSection() {
           <div className="hero-slide">
             <div className="hero-slide-media">
               <img
-                className="hero-slide-img"
+                className=" d-block w-100"
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
                 alt="Campaign analytics"
               />

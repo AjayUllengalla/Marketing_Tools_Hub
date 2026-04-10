@@ -1,6 +1,6 @@
-import { Card } from "react-bootstrap";
+import { Card, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "react-bootstrap";
+import { motion } from "framer-motion";
 import { FaHashtag, FaPenNib, FaRegEnvelope, FaLink } from "react-icons/fa6";
 
 function getStatusBadge(toolPath) {
@@ -37,52 +37,67 @@ export default function ToolCard({ tool, category }) {
   const statusBadge = getStatusBadge(tool.path);
 
   return (
-    <Card
-      className="h-100 tool-card soft-card reveal-card"
-      style={{ cursor: "pointer", transition: "0.3s" }}
-      onClick={() => navigate(`/tool/${tool.path}`)}
-      role="button"
-      tabIndex={0}
-      aria-label={`Open ${tool.name}`}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          navigate(`/tool/${tool.path}`);
-        }
-      }}
+    <motion.div
+      whileHover={{ y: -8, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className="toolcard-motion-wrapper"
     >
-      <Card.Body className="d-flex flex-column justify-content-between">
-        <div>
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <div className="tool-card-icon" aria-hidden="true">
-              {getToolIcon(tool.path)}
+      <Card
+        className="h-100 tool-card soft-card reveal-card premium-card"
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate(`/tool/${tool.path}`)}
+        role="button"
+        tabIndex={0}
+        aria-label={`Open ${tool.name}`}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            navigate(`/tool/${tool.path}`);
+          }
+        }}
+      >
+        <Card.Body className="d-flex flex-column justify-content-between">
+
+          <div>
+            <div className="d-flex align-items-center justify-content-between mb-3">
+              
+              {/* ICON */}
+              <div className="tool-card-icon premium-icon" aria-hidden="true">
+                {getToolIcon(tool.path)}
+              </div>
+
+              {category && (
+                <Badge bg="secondary" className="badge-soft badge-soft--slate">
+                  {category}
+                </Badge>
+              )}
             </div>
-            {category && (
-              <Badge bg="secondary" className="badge-soft badge-soft--slate">
-                {category}
-              </Badge>
+
+            {statusBadge && (
+              <div className="mb-2">
+                <Badge className={statusBadge.className} bg="light">
+                  {statusBadge.label}
+                </Badge>
+              </div>
             )}
-          </div>
 
-          {statusBadge && (
-            <div className="mb-2">
-              <Badge className={statusBadge.className} bg="light">
-                {statusBadge.label}
-              </Badge>
+            <h5 className="mb-2 tool-card-title">{tool.name}</h5>
+
+            <div className="text-muted small mb-0 tool-card-subtitle">
+              Click to open and generate results instantly.
             </div>
-          )}
-
-          <h5 className="mb-2 tool-card-title">{tool.name}</h5>
-          <div className="text-muted small mb-0 tool-card-subtitle">
-            Click to open and generate results instantly.
           </div>
-        </div>
-        <div className="mt-3 text-end">
-          <span className="text-primary small fw-semibold tool-card-cta">
-            Open tool →
-          </span>
-        </div>
-      </Card.Body>
-    </Card>
+
+          {/* CTA */}
+          <div className="mt-3 text-end">
+            <span className="tool-card-cta premium-cta">
+              Open tool →
+            </span>
+          </div>
+
+        </Card.Body>
+      </Card>
+    </motion.div>
   );
 }
