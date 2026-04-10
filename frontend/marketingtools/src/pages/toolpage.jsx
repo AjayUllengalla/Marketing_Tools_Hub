@@ -117,11 +117,11 @@ export default function ToolPage() {
     <div className="container mt-4">
       <div className="tool-page-header mb-4 d-flex justify-content-between align-items-start gap-3 flex-wrap">
         <div>
-          <h2 className="mb-1">{tool.name}</h2>
-          <p className="text-muted small mb-0">
+          <h2 className="mb-1 text-warning">{tool.name}</h2>
+          <h5 className="text-muted small mb-0">
             Fill in the fields below and click{" "}
             <span className="fw-semibold">Generate</span> to get your result.
-          </p>
+          </h5>
         </div>
         <Badge bg="primary" className="badge-soft">
           Powered by ToolsHub
@@ -130,11 +130,11 @@ export default function ToolPage() {
 
       <div className="row g-4">
         <div className="col-lg-5">
-          <div className="card tool-input-card">
+          <div className="card tool-input-card rounded-4">
             <div className="card-body p-4">
               {tool.path !== "utm" && (
                 <Form.Group controlId="toolInput">
-                  <Form.Label className="fw-semibold small text-uppercase text-muted">
+                  <Form.Label className="fw-semibold small text-uppercase  text-warning">
                     Input
                   </Form.Label>
                   <Form.Control
@@ -220,10 +220,10 @@ export default function ToolPage() {
         </div>
 
         <div className="col-lg-7">
-          <div className="card tool-result-card h-100">
+          <div className="card tool-result-card h-100 rounded-4">
             <div className="card-body d-flex flex-column p-4">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h6 className="mb-0 text-uppercase small text-muted">
+                <h6 className="mb-0 text-uppercase small  text-warning">
                   Output
                 </h6>
                 <div className="d-flex gap-2">

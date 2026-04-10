@@ -5,7 +5,7 @@ import { FaHashtag, FaPenNib, FaRegEnvelope, FaLink } from "react-icons/fa6";
 
 function getStatusBadge(toolPath) {
   if (toolPath === "hashtags") {
-    return { label: "Trending", className: "badge-status badge-status--trending" };
+    return { className: "badge-status badge-status--trending" };
   }
   if (toolPath === "utm") {
     return { label: "New", className: "badge-status badge-status--new" };
@@ -32,6 +32,28 @@ function getToolIcon(toolPath) {
   }
 }
 
+
+function getToolImage(toolPath) {
+  switch (toolPath) {
+    case "hashtags":
+      return "https://images.unsplash.com/photo-1611162616475-46b635cb6868";
+    case "caption":
+      return "https://images.unsplash.com/photo-1508780709619-79562169bc64";
+    case "blog-title":
+      return "https://images.unsplash.com/photo-1455390582262-044cdead277a";
+    case "blog-writer":
+      return "https://images.unsplash.com/photo-1499750310107-5fef28a66643";
+    case "email-template":
+      return "https://images.unsplash.com/photo-1521791136064-7986c2920216";
+    case "email-subject":
+      return "https://images.unsplash.com/photo-1557200134-90327ee9fafa";
+    case "utm":
+      return "https://images.unsplash.com/photo-1551288049-bebda4e38f71";
+    default:
+      return "https://images.unsplash.com/photo-1522202176988-66273c2fd55f";
+  }
+}
+
 export default function ToolCard({ tool, category }) {
   const navigate = useNavigate();
   const statusBadge = getStatusBadge(tool.path);
@@ -44,7 +66,7 @@ export default function ToolCard({ tool, category }) {
       className="toolcard-motion-wrapper"
     >
       <Card
-        className="h-100 tool-card soft-card reveal-card premium-card"
+        className="h-100 tool-card-horizontal-new"
         style={{ cursor: "pointer" }}
         onClick={() => navigate(`/tool/${tool.path}`)}
         role="button"
@@ -57,47 +79,58 @@ export default function ToolCard({ tool, category }) {
           }
         }}
       >
-        <Card.Body className="d-flex flex-column justify-content-between">
+        <div className="d-flex h-100">
 
-          <div>
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              
-              {/* ICON */}
-              <div className="tool-card-icon premium-icon" aria-hidden="true">
-                {getToolIcon(tool.path)}
+          {/* LEFT IMAGE */}
+          <div className="tool-left-image">
+            <img
+              src={`${getToolImage(tool.path)}?q=80&w=800&auto=format&fit=crop`}
+              alt={tool.name}
+            />
+          </div>
+
+          {/* RIGHT CONTENT (UNCHANGED LOGIC) */}
+          <Card.Body className="d-flex flex-column justify-content-between tool-right-content">
+
+            <div>
+              <div className="d-flex align-items-center justify-content-between mb-3">
+
+                <div className="tool-card-icon premium-icon">
+                  {getToolIcon(tool.path)}
+                </div>
+
+                {category && (
+                  <Badge bg="secondary" className="badge-soft badge-soft--slate">
+                    {category}
+                  </Badge>
+                )}
               </div>
 
-              {category && (
-                <Badge bg="secondary" className="badge-soft badge-soft--slate">
-                  {category}
-                </Badge>
+              {statusBadge && (
+                <div className="mb-2">
+                  <Badge className={statusBadge.className} bg="light">
+                    {statusBadge.label}
+                  </Badge>
+                </div>
               )}
-            </div>
 
-            {statusBadge && (
-              <div className="mb-2">
-                <Badge className={statusBadge.className} bg="light">
-                  {statusBadge.label}
-                </Badge>
+              <h5 className="mb-2 tool-card-title text-success">{tool.name}</h5>
+
+              <div className="text-muted small mb-0 tool-card-subtitle">
+                <h6>Click to open and generate results instantly.</h6>
               </div>
-            )}
-
-            <h5 className="mb-2 tool-card-title">{tool.name}</h5>
-
-            <div className="text-muted small mb-0 tool-card-subtitle">
-              Click to open and generate results instantly.
             </div>
-          </div>
 
-          {/* CTA */}
-          <div className="mt-3 text-end">
-            <span className="tool-card-cta premium-cta">
-              Open tool →
-            </span>
-          </div>
+            <div className="mt-3 text-end">
+              <span className="tool-card-cta premium-cta">
+                Open tool →
+              </span>
+            </div>
 
-        </Card.Body>
+          </Card.Body>
+        </div>
       </Card>
     </motion.div>
+
   );
 }

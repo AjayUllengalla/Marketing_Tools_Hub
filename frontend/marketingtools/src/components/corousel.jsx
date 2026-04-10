@@ -4,176 +4,91 @@ import { useNavigate } from "react-router-dom";
 export default function CarouselSection() {
   const navigate = useNavigate();
 
+  const slides = [
+    {
+      title: "Social Growth Tools",
+      desc: "Boost engagement with smart hashtags & captions.",
+      btn: "Explore Social Tools",
+      path: "/tool/hashtags",
+      img: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      title: "Content Creation Suite",
+      desc: "Generate blog ideas & write faster with AI.",
+      btn: "Create Content",
+      path: "/tool/blog-title",
+      img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      title: "Email Marketing Tools",
+      desc: "Craft high-converting emails & subject lines.",
+      btn: "Write Emails",
+      path: "/tool/email-template",
+      img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      title: "UTM & Analytics Builder",
+      desc: "Track campaigns and measure performance easily.",
+      btn: "Build Links",
+      path: "/tool/utm",
+      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    },
+  ];
+
   return (
-    <div className="hero-carousel-wrapper mb-4">
-      <Carousel className="hero-carousel" indicators={true}>
-        <Carousel.Item
-          onClick={() => navigate("/tool/hashtags")}
-          style={{ cursor: "pointer" }}
-          role="button"
-          tabIndex={0}
-          aria-label="Open Social Tools"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              navigate("/tool/hashtags");
-            }
-          }}
-        >
-          <div className="hero-slide">
-            <div className="hero-slide-media">
-              <img
-                className=" d-block w-100"
-                src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80"
-                alt="Social marketing"
-              />
-            </div>
-            <div className="hero-slide-content">
-              <div className="hero-slide-inner">
-                <h2 className="hero-slide-title">Social Tools</h2>
-                <p className="hero-slide-lead">
-                  Generate high-impact hashtags in seconds to grow reach and engagement.
-                </p>
-                <Button
-                  className="carousel-cta rounded-pill"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    navigate("/tool/hashtags");
-                  }}
-                >
-                  Generate Hashtags
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Carousel.Item>
+    <div className="modern-carousel-wrapper">
+      <Carousel fade indicators={true} interval={4000}>
 
-        <Carousel.Item
-          onClick={() => navigate("/tool/blog-title")}
-          style={{ cursor: "pointer" }}
-          role="button"
-          tabIndex={0}
-          aria-label="Open Content Tools"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              navigate("/tool/blog-title");
-            }
-          }}
-        >
-          <div className="hero-slide">
-            <div className="hero-slide-media">
-              <img
-                className=" d-block w-100"
-                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=80"
-                alt="Content writing"
-              />
-            </div>
-            <div className="hero-slide-content">
-              <div className="hero-slide-inner">
-                <h2 className="hero-slide-title">Content Tools</h2>
-                <p className="hero-slide-lead">
-                  Produce click-worthy blog titles and sharpen your content strategy.
-                </p>
-                <Button
-                  className="carousel-cta rounded-pill"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    navigate("/tool/blog-title");
-                  }}
-                >
-                  Create Blog Titles
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Carousel.Item>
+        {slides.map((slide, i) => (
+          <Carousel.Item key={i}>
+            <div
+              className="modern-slide"
+              onClick={() => navigate(slide.path)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(slide.path);
+                }
+              }}
+            >
 
-        <Carousel.Item
-          onClick={() => navigate("/tool/email-template")}
-          style={{ cursor: "pointer" }}
-          role="button"
-          tabIndex={0}
-          aria-label="Open Email Tools"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              navigate("/tool/email-template");
-            }
-          }}
-        >
-          <div className="hero-slide">
-            <div className="hero-slide-media">
+              {/* IMAGE */}
               <img
-                className=" d-block w-100"
-                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=80"
-                alt="Email marketing"
+                src={slide.img}
+                alt={slide.title}
+                className="modern-slide-img"
               />
-            </div>
-            <div className="hero-slide-content">
-              <div className="hero-slide-inner">
-                <h2 className="hero-slide-title">Email Tools</h2>
-                <p className="hero-slide-lead">
-                  Build conversion-focused templates and compelling subject lines.
-                </p>
-                <Button
-                  className="carousel-cta rounded-pill"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    navigate("/tool/email-template");
-                  }}
-                >
-                  Draft Email Template
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Carousel.Item>
 
-        <Carousel.Item
-          onClick={() => navigate("/tool/utm")}
-          style={{ cursor: "pointer" }}
-          role="button"
-          tabIndex={0}
-          aria-label="Open UTM Builder"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              navigate("/tool/utm");
-            }
-          }}
-        >
-          <div className="hero-slide">
-            <div className="hero-slide-media">
-              <img
-                className=" d-block w-100"
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-                alt="Campaign analytics"
-              />
-            </div>
-            <div className="hero-slide-content">
-              <div className="hero-slide-inner">
-                <h2 className="hero-slide-title">UTM Builder</h2>
-                <p className="hero-slide-lead">
-                  Generate clean tracking links so you can measure what matters.
-                </p>
-                <Button
-                  className="carousel-cta rounded-pill"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    navigate("/tool/utm");
-                  }}
-                >
-                  Build Tracking Links
-                </Button>
+              {/* OVERLAY CONTENT */}
+              <div className="modern-overlay">
+                <div className="modern-content">
+
+                  <h2 className="modern-title">
+                    {slide.title}
+                  </h2>
+
+                  <p className="modern-desc">
+                    {slide.desc}
+                  </p>
+
+                  <Button
+                    className="modern-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(slide.path);
+                    }}
+                  >
+                    {slide.btn} →
+                  </Button>
+
+                </div>
               </div>
+
             </div>
-          </div>
-        </Carousel.Item>
+          </Carousel.Item>
+        ))}
 
       </Carousel>
     </div>

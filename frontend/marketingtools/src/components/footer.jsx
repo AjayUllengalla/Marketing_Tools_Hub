@@ -1,23 +1,44 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt
+} from "react-icons/fa";
 
 export default function Footer() {
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <footer className="footer-section">
+    <motion.footer
+      className="footer-section"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <Container className="glass-footer">
 
         <Row>
 
-          <Col md={3} className="mb-4 mb-md-0">
-            <h5 className="logo">ToolsHub</h5>
+          {/* BRAND */}
+          <Col md={3} className="mb-4">
+            <h5 className="logo text-warning">ToolsHub</h5>
             <p className="footer-text">
               Your all-in-one platform for marketing tools like hashtags,
               blogs, email templates, and campaign builders.
             </p>
           </Col>
 
-          <Col md={3} className="mb-4 mb-md-0">
+          {/* TOOLS  */}
+          <Col md={3} className="mb-4">
             <h6 className="footer-heading">Tools</h6>
             <ul className="list-unstyled footer-links">
               <li><Link to="/tool/hashtags">Hashtag Generator</Link></li>
@@ -27,23 +48,26 @@ export default function Footer() {
             </ul>
           </Col>
 
-          <Col md={3} className="mb-4 mb-md-0">
+          {/* COMPANY (SCROLL NAV ADDED) */}
+          <Col md={3} className="mb-4">
             <h6 className="footer-heading">Company</h6>
             <ul className="list-unstyled footer-links">
-              <li>About Us</li>
-              <li>Careers</li>
+              <li onClick={() => scrollTo("about-premium")}>About Us</li>
+              <li onClick={() => scrollTo("tools-section")}>Tools Overview</li>
+              <li onClick={() => scrollTo("testimonial-section")}>Testimonials</li>
               <li>Privacy Policy</li>
-              <li>Terms</li>
             </ul>
           </Col>
 
-          <Col md={3} className="mb-4 mb-md-0">
-            <h6 className="footer-heading">Support</h6>
-            <ul className="list-unstyled footer-links">
-              <li>Help Center</li>
-              <li>Contact</li>
-              <li>FAQs</li>
-            </ul>
+          {/* CONTACT (UPGRADED) */}
+          <Col md={3} className="mb-4">
+            <h6 className="footer-heading">Contact Us</h6>
+
+            <div className="footer-contact">
+              <p><FaPhoneAlt /> +91 98765 43210</p>
+              <p><FaEnvelope /> support@toolshub.com</p>
+              <p><FaMapMarkerAlt /> India</p>
+            </div>
 
             <div className="social-icons mt-3">
               <FaFacebook />
@@ -67,82 +91,84 @@ export default function Footer() {
       <style>
         {`
         .footer-section {
-          padding: 80px 0;
-          margin-top: 80px;
-          background: radial-gradient(circle at 30% 30%, #1a1a2e, #0f0f1b);
+          padding: 70px 0;
+          margin-top: 60px;
+          background: linear-gradient( 135deg, #f5f3ff, #e0e7ff, #f0f9ff );
         }
 
         .glass-footer {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(14px);
+          background: linear-gradient( 135deg, #f0f4ff 0%, #e0ecff 50%, #f8fbff 100% );
+          backdrop-filter: blur(12px);
           border-radius: 20px;
-          padding: 50px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: #ffffff;
+          padding: 40px;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          color: #333;
         }
 
         .logo {
-          color: #ffffff;
-          font-weight: 600;
+          font-weight: 700;
+          color: #222;
         }
 
         .footer-text {
           font-size: 14px;
-          color: #aaa;
+          color: #666;
         }
 
         .footer-heading {
-          color: #6c5ce7;
+          color: #4f46e5;
           margin-bottom: 12px;
           font-weight: 600;
         }
 
         .footer-links li {
           margin-bottom: 10px;
+          cursor: pointer;
+          color: #555;
+          transition: 0.3s;
+        }
+
+        .footer-links li:hover {
+          color: #4f46e5;
+          transform: translateX(5px);
         }
 
         .footer-links a {
           text-decoration: none;
-          color: #ccc;
-          font-size: 14px;
-          transition: all 0.3s ease;
+          color: inherit;
         }
 
-        .footer-links a:hover {
-          color: #ffffff;
-          padding-left: 6px;
+        .footer-contact p {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 14px;
+          color: #555;
         }
 
         .social-icons svg {
           margin-right: 12px;
           font-size: 18px;
           cursor: pointer;
-          transition: all 0.3s ease;
-          color: #bbb;
+          transition: 0.3s;
+          color: #555;
         }
 
         .social-icons svg:hover {
-          color: #6c5ce7;
+          color: #4f46e5;
           transform: scale(1.2);
         }
 
         hr {
-          border-color: rgba(255, 255, 255, 0.1);
-          margin: 30px 0;
+          border-color: rgba(0, 0, 0, 0.08);
         }
 
         .copyright {
-          font-size: 14px;
-          color: #aaa;
-        }
-
-        @media (max-width: 768px) {
-          .glass-footer {
-            padding: 25px;
-          }
+          font-size: 13px;
+          color: #777;
         }
         `}
       </style>
-    </footer>
+    </motion.footer>
   );
 }
