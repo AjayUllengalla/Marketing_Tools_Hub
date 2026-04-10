@@ -1,10 +1,24 @@
-HELP.md
+# ===============================
+# 🚀 Spring Boot / Java
+# ===============================
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*.log
 
-### STS ###
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# ===============================
+# 🔐 Environment & Secrets
+# ===============================
+.env
+application.properties
+application-*.properties
+
+# ===============================
+# 💻 IDE Files
+# ===============================
+
+# STS / Eclipse
 .apt_generated
 .classpath
 .factorypath
@@ -13,35 +27,36 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# IntelliJ
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# VS Code
+.vscode/
+
+# ===============================
+# 🧱 Build Tools
+# ===============================
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-# Environment files
-.env
 
-# Application config (contains API keys)
-application.properties
-application-*.properties
-
-# Build files
-target/
-*.log
-
-# IDE files
-.vscode/
-.idea/
-
-# OS files
+# ===============================
+# 🍎 OS Files
+# ===============================
 .DS_Store
+Thumbs.db
+
+# ===============================
+# 🌐 React / Frontend
+# ===============================
+node_modules/
+dist/
+build/
+
+# ===============================
+# 🧪 Test & Misc
+# ===============================
+coverage/

@@ -1,5 +1,7 @@
 package com.futureinvo.marketingtoolshub.service;
 
+import java.util.InputMismatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -21,8 +23,13 @@ public class SocialService {
 		}
 
 		try {
-			String prompt = "Generate 10 trending hashtags for: " + keyword;
+			String prompt = "Act as a Social SEO Expert. Generate 10 SEO-optimized hashtags for: " + keyword +
+					". Categorize them into: 3 Broad Industry tags, 4 Niche/Search-intent tags, 2 Community tags, and 1 Branded/Campaign tag. "
+					+
+					"Ensure they use #CamelCase for accessibility and prioritize keywords that users actually type into social search bars.";
 			return gemini.generate(prompt);
+		} catch(InputMismatchException	 ex) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
 			throw new CustomException("Error while generating hashtags: " + e.getMessage());
 		}
@@ -40,11 +47,16 @@ public class SocialService {
 																							// length
 		}
 		try {
-			String prompt = "Generate a Description or caption  for post or video or reel for social media post "
-					+ description;
+			String prompt = "Act as a Social Media Strategist. Write a high-engagement, SEO-optimized caption for a [Post/Video/Reel] about: "
+					+ description +
+					". Structure the response with: 1. A 'Scroll-Stopping' hook, 2. A keyword-rich body paragraph (under 150 words), 3. A clear CTA, and 4. A 'Social SEO' summary of 3 primary keywords to include in the alt-text. "
+					+
+					"Use an engaging but authentic tone and naturally integrate the keyword: '";
 			return gemini.generate(prompt);
+		} catch(InputMismatchException ex) {
+			throw new CustomException("Must Enter valid keywords or characters");
 		} catch (Exception e) {
-			throw new CustomException("Error while generating description: " + e.getMessage());
+			throw new CustomException("Error while generating description or caption: " + e.getMessage());
 		}
 	}
 
